@@ -1,7 +1,7 @@
 IWC - Inter Widget Communication
 ===
 
-Enables the inter-widget communication and drag and drop between widgets.
+Enables the inter-widget communication and drag and drop between widgets within a widget container.
 
 ## How to start
 
