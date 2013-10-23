@@ -2,8 +2,19 @@
 html
   head
     link(type='text/css', rel='stylesheet', href='style.css')
-    title Destination frame
+    title Source widget
   body
-    h1 Destination frame
+    h1 Source widget
+
+    h2 IWC as event
+    .block
+      .text
+        input(type="text", value="Text to send")
+      button
+        | Send event
+
+    h2 IWC as drag and drop
+    .block
+      img.dragme(src="dragme.png")
 
 
