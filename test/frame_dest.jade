@@ -7,9 +7,21 @@ html
     h1 Destination widget
 
     h2 IWC as event
-    .block
+    #data.block
 
     h2 IWC as drag and drop
     .block
 
     script(type='text/javascript', src='../lib/iwc.js')
+    script(type='text/javascript', src='../test/jquery-2.0.3.min.js')
+    script(type="text/javascript")
+      // process events received
+      var onEvent = function (envelope, message) {
+        var text = message.text
+
+        $("<span>" + text + "</span>")
+          .appendTo($("#data"));
+      };
+
+      // start listenning on events
+      iwc.connect(onEvent);

@@ -47,7 +47,7 @@ doCallback = null
 The internal callback function that in turn calls doCallback is kept here.
 ###
 onMessage = (event) ->
-  if typeof event.data is "string" and event.data.slice(0, 25) is "{\"IWCEvent\":{"
+  if typeof event.data is "string" and event.data.slice(0, 13) is "{\"IWCEvent\":{"
     envelope = JSON.parse(event.data).IWCEvent
     if envelope.event is "iwc" and envelope.welcome is true and event.source is window.parent
       for p of envelope.message

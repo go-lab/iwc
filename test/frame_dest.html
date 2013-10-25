@@ -7,8 +7,22 @@
   <body>
     <h1>Destination widget</h1>
     <h2>IWC as event</h2>
-    <div class="block"></div>
+    <div id="data" class="block"></div>
     <h2>IWC as drag and drop</h2>
     <div class="block"></div>
+    <script type="text/javascript" src="../lib/iwc.js"></script>
+    <script type="text/javascript" src="../test/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+      // process events received
+      var onEvent = function (envelope, message) {
+        var text = message.text
+        
+        $("<span>" + text + "</span>")
+          .appendTo($("#data"));
+      };
+      
+      // start listenning on events
+      iwc.connect(onEvent);
+    </script>
   </body>
 </html>

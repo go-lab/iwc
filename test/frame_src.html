@@ -9,12 +9,28 @@
     <h2>IWC as event</h2>
     <div class="block">
       <div class="text">
-        <input type="text" value="Text to send">
+        <input id="text" type="text" value="Text to send">
       </div>
-      <button>Send event</button>
+      <button id="button">Send event</button>
     </div>
     <h2>IWC as drag and drop</h2>
     <div class="block"><img src="dragme.png" class="dragme"></div>
     <script type="text/javascript" src="../lib/iwc.js"></script>
+    <script type="text/javascript" src="../test/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript">
+      var onClick = function() {
+        var text = $("#text").val()
+        // send data
+        iwc.publish({
+          event: "select",
+          type: "json",
+          message: {
+            text: text
+          }
+        });
+      };
+      $("#button").click(onClick)
+      
+    </script>
   </body>
 </html>
