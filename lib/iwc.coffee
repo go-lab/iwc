@@ -138,5 +138,33 @@ iwc =
     else
       window.postMessage data, "*"
 
+  ###
+  Builds an object that can be dragged
+  ###
+  draggable: (elemId, opts) ->
+    # find object node in DOM
+    draggable = document.getElementById(elemId)
+
+    draggable.addEventListener "dragstart", (ev) ->
+      ev.dataTransfer.setData "data", "dragme.png"
+
+  ###
+  Builds an object where data can be dropped
+  ###
+  droppable: (elemId, opts) ->
+    # find object node in DOM
+    target = document.getElementById(elemId)
+
+    target.addEventListener "drop", (ev) ->
+      ev.preventDefault()
+      data = ev.dataTransfer.getData("data")
+      $("#droparea").append $("<img src='" + data + "'/>")
+      console.log "drop"
+
+    target.addEventListener "dragover", (ev) ->
+      ev.preventDefault()
+      console.log "dragover"
+
+
 # attache iwc to the window object
 window.iwc = iwc

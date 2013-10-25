@@ -9,5 +9,5 @@ iframe {
   border: 1px solid #f00;
 }
 .dragme {
-  cursor: pointer;
+  cursor: move;
 }

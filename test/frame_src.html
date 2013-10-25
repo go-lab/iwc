@@ -14,23 +14,41 @@
       <button id="button">Send event</button>
     </div>
     <h2>IWC as drag and drop</h2>
-    <div class="block"><img src="dragme.png" class="dragme"></div>
+    <div class="block"><img id="dragme" src="dragme.png" draggable="true" class="dragme"></div>
     <script type="text/javascript" src="../lib/iwc.js"></script>
     <script type="text/javascript" src="../test/jquery-2.0.3.min.js"></script>
     <script type="text/javascript">
-      var onClick = function() {
-        var text = $("#text").val()
-        // send data
-        iwc.publish({
-          event: "select",
-          type: "json",
-          message: {
-            text: text
-          }
-        });
-      };
-      $("#button").click(onClick)
+      $(window).load(function () {
       
+        // ------------
+        // IWC code
+        // ------------
+        
+        var onClick = function() {
+          var text = $("#text").val()
+          // send data
+          iwc.publish({
+            event: "select",
+            type: "json",
+            message: {
+              text: text
+            }
+          });
+        };
+        $("#button").click(onClick)
+        
+        // ------------
+        // Drag and drop code
+        // ------------
+        
+        iwc.draggable('dragme')
+        
+        //-var dragEl = document.getElementById('dragme');
+        //-dragEl.addEventListener("dragstart", function (ev) {
+          //-ev.dataTransfer.setData("data", "dragme.png");
+        //-}, false);
+        
+      })
     </script>
   </body>
 </html>

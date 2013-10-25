@@ -9,20 +9,48 @@
     <h2>IWC as event</h2>
     <div id="data" class="block"></div>
     <h2>IWC as drag and drop</h2>
-    <div class="block"></div>
+    <div id="droparea" class="block"></div>
     <script type="text/javascript" src="../lib/iwc.js"></script>
     <script type="text/javascript" src="../test/jquery-2.0.3.min.js"></script>
     <script type="text/javascript">
-      // process events received
-      var onEvent = function (envelope, message) {
-        var text = message.text
-        
-        $("<span>" + text + "</span>")
-          .appendTo($("#data"));
-      };
+      $(window).load(function () {
       
-      // start listenning on events
-      iwc.connect(onEvent);
+        // ------------
+        // IWC code
+        // ------------
+        
+        // process events received
+        var onEvent = function (envelope, message) {
+          var text = message.text
+          
+          $("<span>" + text + "</span>")
+            .appendTo($("#data"));
+        };
+        
+        // start listenning on events
+        iwc.connect(onEvent);
+        
+        // ------------
+        // Drag and drop code
+        // ------------
+        
+        iwc.droppable('droparea')
+        
+        //-var target = document.getElementById('droparea');
+        //-target.addEventListener("drop", function (ev) {
+          //-ev.preventDefault()
+          //-var data=ev.dataTransfer.getData("data");
+          //-$('#droparea').append($("<img src='"+data+"'/>"))
+          //-console.log("drop")
+        //-}, false);
+        
+        //-target.addEventListener("dragover", function (ev) {
+          //-ev.preventDefault()
+          //-console.log("dragover")
+        //-}, false);
+        
+      })
+      
     </script>
   </body>
 </html>
