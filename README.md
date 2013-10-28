@@ -1,7 +1,7 @@
-IWC - Inter Widget Communication with Drag and Drop
+Inter Widget Communication with Drag&Drop
 ===
 
-Enables the inter-widget communication and drag and drop between widgets
+Enables the inter widget communication and drag and drop between widgets
 within a widget container.
 
 ## How to start
@@ -16,11 +16,10 @@ another with drag and drop.
 
 ## Example 1: send data from one widget to another
 
-    // require thi iwc library in your html code
+    // require the iwc library in both src and dest widgets
     <script type="text/javascript" src="http://graasp.epfl.ch/gadget/libs/iwc.min.js"></script>
 
     // ------- Source gadget --------
-
     // send some data
     iwc.publish({
       event: "select",
@@ -31,7 +30,6 @@ another with drag and drop.
     })
 
     // ------- Destination gadget --------
-
     // start listenning on incoming events
     iwc.connect(function (envelope, message) {
       var data = message.data
@@ -39,13 +37,12 @@ another with drag and drop.
     }
 
 
-## Example 2: drag and drop an object from one widget to another
+## Example 2: drag&drop from one widget to another
 
-    // require thi iwc library in your html code
+    // require the iwc library in both src and dest widgets
     <script type="text/javascript" src="http://graasp.epfl.ch/gadget/libs/iwc.min.js"></script>
 
     // ------- Source gadget --------
-
     // 'dragme' - id of the DOM node that can be dragged
     iwc.draggable('dragme', {
       // function should return the data that you want to transfer
@@ -55,7 +52,6 @@ another with drag and drop.
     })
 
     // ------- Destination gadget --------
-
     // start listenning on incoming events
     iwc.connect(function (envelope, message) {
       var data = message.data
@@ -64,9 +60,6 @@ another with drag and drop.
 
 
 
-## License
-Copyright (c) 2013 Evgeny Bogdanov. All rights reserved.
-
 ## Thanks
 
 The initial code of inter-widget communication is based on
@@ -74,6 +67,27 @@ the [openapp library](https://code.google.com/p/open-app/) by
 [Erik Isaksson](https://github.com/erikis)
 and [Matthias Palmér](https://github.com/matthiaspalmer).
 
+## MIT License
+
+Copyright (c) 2013 Evgeny Bogdanov
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
 
 
 
