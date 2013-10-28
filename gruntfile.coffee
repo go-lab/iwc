@@ -81,13 +81,13 @@ module.exports = (grunt) ->
 
     uglify:
       options:
-        mangle: false
+        mangle: true
       minify:
         expand: true
-        cwd: 'public/cdn/js/'
+        cwd: 'lib/'
         src: ['*.js']
-        dest: 'public/cdn/js/'
-        ext: '.js'
+        dest: 'lib/'
+        ext: '.min.js'
 
     # Run all the tests (or a single test)
     simplemocha:
@@ -152,6 +152,27 @@ module.exports = (grunt) ->
         command:
           "make debug"
 
+      # copy minified file to remote server
+      publish:
+        options:
+          stdout: true
+          stderr: true
+        command: [
+          # minify the iwc.js file
+          "grunt uglify:minify"
+          # using rsync with compression
+          "rsync -az --delete --force ./lib/*.min.js admin@graasp.epfl.ch:/Graaasp/shared/system/gadgets_src/libs/"
+        ].join '&&'
+
+      # Cleans up the repo after build is done and tests are run
+      cleanUp:
+        options:
+          stdout: true
+          stderr: true
+        command: [
+          # remove min files
+          "rm -rf lib/*.min.js"
+        ].join '&&'
 
   # Load NPM tasks
   grunt.loadNpmTasks "grunt-contrib-watch"
@@ -171,6 +192,7 @@ module.exports = (grunt) ->
 
   grunt.registerTask "default", ["start:target"]
   grunt.registerTask "debug", ["shell:debug"]
+  grunt.registerTask "deploy", ["shell:publish", "shell:cleanUp"]
   # compiles all jade/styl/coffee
   grunt.registerTask "compile", ["jade", "stylus", "coffee:compile"]
 

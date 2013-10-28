@@ -17,7 +17,7 @@ another with drag and drop.
 ## Example 1: send data from one widget to another
 
     // require thi iwc library in your html code
-    <script type="text/javascript" src="http://graasp.epfl.ch/gadget/libs/iwc.js"></script>
+    <script type="text/javascript" src="http://graasp.epfl.ch/gadget/libs/iwc.min.js"></script>
 
     // ------- Source gadget --------
 
@@ -28,7 +28,7 @@ another with drag and drop.
       message: {
         data: "some text"
       }
-    });
+    })
 
     // ------- Destination gadget --------
 
@@ -42,18 +42,17 @@ another with drag and drop.
 ## Example 2: drag and drop an object from one widget to another
 
     // require thi iwc library in your html code
-    <script type="text/javascript" src="http://graasp.epfl.ch/gadget/libs/iwc.js"></script>
+    <script type="text/javascript" src="http://graasp.epfl.ch/gadget/libs/iwc.min.js"></script>
 
     // ------- Source gadget --------
 
-    // send some data
-    iwc.publish({
-      event: "select",
-      type: "json",
-      message: {
-        data: "some text"
+    // 'dragme' - id of the DOM node that can be dragged
+    iwc.draggable('dragme', {
+      // function should return the data that you want to transfer
+      dragstart: function () {
+        return "my data"
       }
-    });
+    })
 
     // ------- Destination gadget --------
 

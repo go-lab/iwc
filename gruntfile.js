@@ -96,14 +96,14 @@
       },
       uglify: {
         options: {
-          mangle: false
+          mangle: true
         },
         minify: {
           expand: true,
-          cwd: 'public/cdn/js/',
+          cwd: 'lib/',
           src: ['*.js'],
-          dest: 'public/cdn/js/',
-          ext: '.js'
+          dest: 'lib/',
+          ext: '.min.js'
         }
       },
       simplemocha: {
@@ -168,6 +168,20 @@
             stdout: true
           },
           command: "make debug"
+        },
+        publish: {
+          options: {
+            stdout: true,
+            stderr: true
+          },
+          command: ["grunt uglify:minify", "rsync -az --delete --force ./lib/*.min.js admin@graasp.epfl.ch:/Graaasp/shared/system/gadgets_src/libs/"].join('&&')
+        },
+        cleanUp: {
+          options: {
+            stdout: true,
+            stderr: true
+          },
+          command: ["rm -rf lib/*.min.js"].join('&&')
         }
       }
     });
@@ -187,6 +201,7 @@
 
     grunt.registerTask("default", ["start:target"]);
     grunt.registerTask("debug", ["shell:debug"]);
+    grunt.registerTask("deploy", ["shell:publish", "shell:cleanUp"]);
     grunt.registerTask("compile", ["jade", "stylus", "coffee:compile"]);
     /*
     Graspio custom tasks
