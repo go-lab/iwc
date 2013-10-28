@@ -140,24 +140,38 @@ iwc =
 
   ###
   Builds an object that can be dragged
+
+  @opts Object containing possible additional options
+    :dragstart - callback allows to send data to another widget,
+        it should return the data that will be sent
   ###
   draggable: (elemId, opts) ->
+    opts = opts || {}
+
     # find object node in DOM
     draggable = document.getElementById(elemId)
 
     draggable.addEventListener "dragstart", (ev) ->
-      ev.dataTransfer.setData "data", "dragme.png"
+      if opts.dragstart
+        data = opts.dragstart()
+        ev.dataTransfer.setData "IWCData", data
 
   ###
   Builds an object where data can be dropped
+
+  @opts Object containing possible additional options
+    :dragstart - callback allows to send data to another widget,
+        it should return the data that will be sent
   ###
   droppable: (elemId, opts) ->
+    opts = opts || {}
+
     # find object node in DOM
     target = document.getElementById(elemId)
 
     target.addEventListener "drop", (ev) ->
       ev.preventDefault()
-      data = ev.dataTransfer.getData("data")
+      data = ev.dataTransfer.getData("IWCData")
       $("#droparea").append $("<img src='" + data + "'/>")
       console.log "drop"
 

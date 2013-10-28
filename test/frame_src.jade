@@ -43,7 +43,11 @@ html
         // Drag and drop code
         // ------------
 
-        iwc.draggable('dragme')
+        iwc.draggable('dragme', {
+          dragstart: function () {
+            return "dragme.png"
+          }
+        })
 
         //-var dragEl = document.getElementById('dragme');
         //-dragEl.addEventListener("dragstart", function (ev) {
