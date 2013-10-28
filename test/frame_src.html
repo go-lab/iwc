@@ -42,8 +42,11 @@
         // ------------
         
         iwc.draggable('dragme', {
+          // dragstart should return the data that you want to transfer
           dragstart: function () {
-            return "dragme.png"
+            console.log("dragstart")
+            var data = "dragme.png"
+            return data
           }
         })
         

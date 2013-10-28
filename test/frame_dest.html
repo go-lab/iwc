@@ -34,20 +34,15 @@
         // Drag and drop code
         // ------------
         
-        iwc.droppable('droparea')
-        
-        //-var target = document.getElementById('droparea');
-        //-target.addEventListener("drop", function (ev) {
-          //-ev.preventDefault()
-          //-var data=ev.dataTransfer.getData("data");
-          //-$('#droparea').append($("<img src='"+data+"'/>"))
-          //-console.log("drop")
-        //-}, false);
-        
-        //-target.addEventListener("dragover", function (ev) {
-          //-ev.preventDefault()
-          //-console.log("dragover")
-        //-}, false);
+        iwc.droppable('droparea', {
+          drop: function (data) {
+            $("#droparea").append($("<img src='" + data + "'/>"))
+            console.log("drop")
+          },
+          dragover: function () {
+            console.log("dragover")
+          }
+        })
         
       })
       

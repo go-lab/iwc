@@ -6,6 +6,10 @@ within a widget container.
 
 ## How to start
 Check test/index.html as an example
+or
+see widgets in action here:
+[https://graasp.epfl.ch/#url=iwc](https://graasp.epfl.ch/#url=iwc)
+
 
 ## Description
 
@@ -52,13 +56,53 @@ another with drag and drop.
     })
 
     // ------- Destination gadget --------
+    // 'droparea' - id of the DOM node that accepts draged elements
+    iwc.droppable('droparea', {
+      drop: function (data) {
+        // data - that was passed during the drop
+      }
+    })
+
+## APIs
+### Inter widget communication
+
     // start listenning on incoming events
     iwc.connect(function (envelope, message) {
-      var data = message.data
-      console.log(data)
+      // envelope - contains extra info about the event  
+      // message - object passed from one widget to another
+    })
+
+    // broadcasts event to other widgets
+    iwc.publish({
+      event: "select",       // type of event: select, click, etc.
+      type: "json",
+      message: {             // message object passed
+        data: "some text"
+      }
+    })
+
+### Drag and drop
+  
+    // turns a DOM element into a draggable object
+    iwc.draggable(elemId, opts)
+
+    opts.dragstart = function (drag) {
+      // drag - object on which dragstart is executed
+      return {data: "data"} // this data passed to droppable object
     }
 
+    // turns a DOM element into a droppable object
+    iwc.droppable(elemId, opts)
 
+    opts.drop = function (data, drop, drag) {
+      // data - that was passed to droppable object
+      // drop - object on where the drop occured
+      // drag - object that was dropped
+    }
+
+    opts.dragover = function (drop) {
+      // drop - object on where the drop occured
+    }
 
 ## Thanks
 

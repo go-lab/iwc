@@ -153,15 +153,17 @@ iwc =
 
     draggable.addEventListener "dragstart", (ev) ->
       if opts.dragstart
-        data = opts.dragstart()
-        ev.dataTransfer.setData "IWCData", data
+        data = opts.dragstart(ev.target)
+        # set id of dragged element and the data
+        envelope = JSON.stringify({dragId: ev.target.id, data: data})
+        ev.dataTransfer.setData "IWCData", envelope
 
   ###
   Builds an object where data can be dropped
 
   @opts Object containing possible additional options
-    :dragstart - callback allows to send data to another widget,
-        it should return the data that will be sent
+    :dragover(data) - actions to do when a dragged object is over the droppable node
+    :drop(elem) - actions to do when a dragged object is dropped
   ###
   droppable: (elemId, opts) ->
     opts = opts || {}
@@ -169,15 +171,22 @@ iwc =
     # find object node in DOM
     target = document.getElementById(elemId)
 
+    # listener for drop event
     target.addEventListener "drop", (ev) ->
       ev.preventDefault()
-      data = ev.dataTransfer.getData("IWCData")
-      $("#droparea").append $("<img src='" + data + "'/>")
-      console.log "drop"
 
+      envelope = JSON.parse(ev.dataTransfer.getData "IWCData")
+      drag = document.getElementById(envelope.dragId)
+
+      if opts.drop
+        opts.drop(envelope.data, ev.target, drag)
+
+    # listener for dragover events
     target.addEventListener "dragover", (ev) ->
       ev.preventDefault()
-      console.log "dragover"
+
+      if opts.dragover
+        opts.dragover(ev.target)
 
 
 # attache iwc to the window object
