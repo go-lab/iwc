@@ -5,10 +5,13 @@ Enables the inter widget communication and drag and drop between widgets
 within a widget container.
 
 ## How to start
-Check test/index.html as an example
-or
-see widgets in action here:
+
+* See two widgets in action here:
 [https://graasp.epfl.ch/#url=iwc](https://graasp.epfl.ch/#url=iwc)
+* Source code of these widgets:
+[src.xml](http://graasp.epfl.ch/gadget/iwc/src.xml) and
+[dest.xml](http://graasp.epfl.ch/gadget/iwc/dest.xml)
+
 
 
 ## Description
@@ -64,7 +67,7 @@ another with drag and drop.
     })
 
 ## APIs
-### Inter widget communication
+### Inter Widget Communication
 
     // start listenning on incoming events
     iwc.connect(function (envelope, message) {
